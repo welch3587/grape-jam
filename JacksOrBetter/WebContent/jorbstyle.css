@@ -1,0 +1,148 @@
+@CHARSET "ISO-8859-1";
+title {
+	background-color: green;
+}
+
+body {
+    background-color: green;
+}
+
+td {
+	padding: 2px;
+}
+
+.PayoutTable {
+	border-collapse: collapse;
+	border:solid windowtext 2pt;
+	background-color:blue;
+	font-size: 125%;
+	
+}
+
+.PayoutTitleRow {
+	background-color: yellow;
+	font-weight: bold;
+	padding: 1px;
+	line-height:0px;
+}
+
+.PayoutTableData {
+	color: yellow;
+	font-weight: bold;
+	/*width:1.45in;*/
+	border:solid windowtext 1.0pt;
+	width:75px;
+	line-height:0px;
+	valign:top;
+}
+
+#HandRankTitle, #PTD00, #PTD10, #PTD20, #PTD30, #PTD40, #PTD50, #PTD60, #PTD70, #PTD80 {
+	width: 250px;
+	valign:top;
+} 
+
+.holddata {
+	width:128px;
+	valign:top;
+	/*width:95.75pt;*/
+	height: 40pt;
+	border:none;
+    padding:0in 5.4pt 0in 5.4pt;
+}
+
+.holdtext {
+}
+
+.cardrow {
+	height:108.85pt;
+}
+
+.cardbox {
+	width:128px;
+	valign:top; 
+	/*width:95.75pt;*/
+	border:none;
+    padding:0in 5.4pt 0in 5.4pt;
+    height:108.85pt;
+}
+
+#hold1 {
+	hidden:true;
+	align:center;
+	margin-bottom:0in;
+	margin-bottom:.0001pt;
+    text-align:center;
+    line-height:normal;
+}
+
+#hold2 {
+	hidden:true;
+	align:center;
+	margin-bottom:0in;
+	margin-bottom:.0001pt;
+    text-align:center;
+    line-height:normal;
+}
+
+#hold3 {
+	hidden:true;
+	align:center;
+	margin-bottom:0in;
+	margin-bottom:.0001pt;
+    text-align:center;
+    line-height:normal;
+}
+
+#hold4 {
+	hidden:true;
+	align:center;
+	margin-bottom:0in;
+	margin-bottom:.0001pt;
+    text-align:center;
+    line-height:normal;
+}
+
+#hold5 {
+	hidden:true;
+	align:center;
+	margin-bottom:0in;
+	margin-bottom:.0001pt;
+    text-align:center;
+    line-height:normal;
+}
+
+.controls {
+	valign:top;
+	halign:center;
+}
+
+#betValDisplay {
+	width:10px;	
+	background-color:green;
+}
+
+#bet1button {
+	display: none;
+}
+
+#bet2button {
+	display: none;
+}
+
+#bet3button {
+	display: none;
+}
+
+#bet4button {
+	display: none;
+}
+
+#bet5button {
+	display: none;
+}
+
+.payoutText {
+	display: none;
+	font-size:125%
+}
+
