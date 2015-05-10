@@ -7,36 +7,49 @@ body {
     background-color: green;
 }
 
-td {
-	padding: 2px;
-}
-
-.PayoutTable {
+#PayoutTable {
 	border-collapse: collapse;
 	border:solid windowtext 2pt;
 	background-color:blue;
 	font-size: 125%;
-	
 }
 
-.PayoutTitleRow {
+#PayoutTable #TitleRow {
 	background-color: yellow;
-	font-weight: bold;
 	padding: 1px;
-	line-height:0px;
+	font-weight: bold;
+	line-height:20px;
+	color: black;
 }
 
-.PayoutTableData {
+#PayoutTable .RowIndex {
+	color: yellow;
+	border-color: black;
+}
+
+#PayoutTable #TitleRow .RowIndex {
+	color: black;
+}
+
+#PayoutTable #TitleData {
+	text-align: right;
+}
+
+#PayoutTable #DetailData {
 	color: yellow;
 	font-weight: bold;
-	/*width:1.45in;*/
 	border:solid windowtext 1.0pt;
 	width:75px;
-	line-height:0px;
-	valign:top;
+	text-align: right;
 }
 
-#HandRankTitle, #PTD00, #PTD10, #PTD20, #PTD30, #PTD40, #PTD50, #PTD60, #PTD70, #PTD80 {
+/*
+#PayoutTable .ROYALFLUSH .BET2 {
+	background-color: red;
+	}
+*/
+
+#PayoutTable .RowIndex {
 	width: 250px;
 	valign:top;
 } 
@@ -114,11 +127,23 @@ td {
 .controls {
 	valign:top;
 	halign:center;
+	font-size:125%;
+}
+
+.submitControl {
+	width: 200px;
+	font-size:125%;
+}
+
+#betDisplay, #creditsDisplay {
+	font-size: 125%;
 }
 
 #betValDisplay {
-	width:10px;	
+	width:30px;	
 	background-color:green;
+	border: none;
+	font-size:125%;
 }
 
 #bet1button {
@@ -143,6 +168,6 @@ td {
 
 .payoutText {
 	display: none;
-	font-size:125%
+	font-size:125%;
 }
 
