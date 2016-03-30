@@ -43,12 +43,12 @@
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "default",
     "subnetPrefix": "10.0.0.0/24",
-    "publicIPAddressName": "gridmanager00",
+    "publicIPAddressName": "[parameters('vmName')]",
     "publicIPAddressType": "Dynamic",
     "virtualNetworkName": "GridServerDev",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
-    "nicName": "gridmanager00658"
+    "nicName": "[parameters('vmName')]"
   },
   "resources": [
     {
@@ -57,6 +57,10 @@
       "name": "[variables('virtualNetworkName')]",
       "location": "[parameters('location')]",
       "properties": {
+	    "dnsSettings": {
+          "domainNameLabel": "[parameters('vmName')]",
+          "fqdn": "[parameters('vmName')].centralus.cloudapp.azure.com"
+        },
         "addressSpace": {
           "addressPrefixes": [
             "[variables('addressPrefix')]"
