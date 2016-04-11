@@ -73,10 +73,10 @@
     "subnetName": "default",
     "subnetPrefix": "10.0.0.0/24",
     "virtualNetworkName": "GridServerDev",
-    "nicName": "[parameters('vmName')]"
+    "nicName": "[parameters('vmName')]",
     "publicIPAddressName": "[parameters('vmName')]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
   },
   "resources": [
     {
