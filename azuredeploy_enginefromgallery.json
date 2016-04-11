@@ -68,8 +68,10 @@
     "addressPrefix": "10.0.0.0/16",
     "api-version": "2015-06-15",
     "imageOffer": "UbuntuServer",
-	"imagePublisher": "Canonical",
+    "imagePublisher": "Canonical",
     "publicIPAddressType": "Dynamic",
+    "storageAccountName": "gridserverdevstorage",
+    "storageAccountType": "Standard_LRS",
     "subnetName": "default",
     "subnetPrefix": "10.0.0.0/24",
     "virtualNetworkName": "GridServerDev",
@@ -79,6 +81,15 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
   },
   "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storageAccountName')]",
+      "apiVersion": "[variables('api-version')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "accountType": "[variables('storageAccountType')]"
+      }
+    },
     {
       "apiVersion": "[variables('api-version')]",
       "type": "Microsoft.Network/virtualNetworks",
