@@ -169,12 +169,12 @@
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
-		"osProfile": {
-          "computerName": "[variables('vmName')]",
+	"osProfile": {
+          "computerName": "[parameters('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
-		"storageProfile": {
+	"storageProfile": {
           "imageReference": {
             "publisher": "[variables('imagePublisher')]",
             "offer": "[variables('imageOffer')]",
