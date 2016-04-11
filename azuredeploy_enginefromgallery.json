@@ -126,7 +126,7 @@
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
-          "domainNameLabel": "concat([parameters('vmName'), parameters('vmDateTime'))]"
+          "domainNameLabel": "[parameters('vmName')]"
         }
       }
     },
