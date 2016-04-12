@@ -84,7 +84,7 @@
     "virtualNetworkName": "GridServerDev",
     "dnsPrefix": "[concat(parameters('vmName'),parameters('vmDateTime'))]",
     "nicName": "[parameters('vmName')]",
-    "publicIPAddressName": "[parameters('vmName')]",
+    "publicIPAddressName": "[parameters('dnsPrefix')]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
   },
