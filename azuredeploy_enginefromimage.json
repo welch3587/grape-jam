@@ -45,7 +45,7 @@
         "description": "Name of the VM"
       }
     },
-	"vmDateTime": {
+    "vmDateTime": {
       "type": "string",
       "metadata": {
         "description": "In the format of yyyyMMddHHmmssSSS so we can uniquely identify the objects specifically associated with this VM"
@@ -84,7 +84,7 @@
     "virtualNetworkName": "GridServerDev",
     "dnsPrefix": "[concat(parameters('vmName'),parameters('vmDateTime'))]",
     "nicName": "[parameters('vmName')]",
-    "publicIPAddressName": "[parameters('dnsPrefix')]",
+    "publicIPAddressName": "[variables('dnsPrefix')]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
   },
