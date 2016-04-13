@@ -168,7 +168,7 @@
     {
       "apiVersion": "[variables('api-version')]",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[parameters('vmUniqueName')]",
+      "name": "[variables('vmUniqueName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
 	    "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
