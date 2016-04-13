@@ -82,8 +82,9 @@
     "subnetName": "default",
     "subnetPrefix": "10.0.0.0/24",
     "virtualNetworkName": "GridServerDev",
-    "dnsPrefix": "[concat(parameters('vmName'),parameters('vmDateTime'))]",
-    "nicName": "[parameters('vmName')]",
+    "vmUniqueName": "[concat(parameters('vmName'),parameters('vmDateTime'))]",
+    "dnsPrefix": "[variables('vmUniqueName')]",
+    "nicName": "[variables('vmUniqueName')]",
     "publicIPAddressName": "[variables('dnsPrefix')]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
@@ -167,7 +168,7 @@
     {
       "apiVersion": "[variables('api-version')]",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[parameters('vmName')]",
+      "name": "[parameters('vmUniqueName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
 	    "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
