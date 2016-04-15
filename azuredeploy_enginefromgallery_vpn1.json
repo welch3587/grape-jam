@@ -73,9 +73,9 @@
   },
   "variables": {
     "virtualNetworkName": "TestVPNet",
-    "addressPrefix": "192.168.0.0/16",
-    "subnetName": "GatewaySubnet",
-    "subnetPrefix": "192.168.200.0/26",
+    "addressPrefix": "10.254.0.0/16",
+    "subnetName": "Backend",
+    "subnetPrefix": "10.254.1.0/24",
     "api-version": "2015-06-15",
     "imageOffer": "UbuntuServer",
     "imagePublisher": "Canonical",
