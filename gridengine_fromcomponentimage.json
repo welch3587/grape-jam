@@ -110,14 +110,11 @@
             }
           }
         ],
-		"networkSecurityGroup": { 
-			"id": "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('storageAccountName'),'/providers/Microsoft.Network/networkSecurityGroups/',parameters('networkSecurityGroup'))]"
+	"networkSecurityGroup": { 
+		"id": "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('storageAccountName'),'/providers/Microsoft.Network/networkSecurityGroups/',parameters('networkSecurityGroup'))]"
 		},
-		"primary": true,
-		"virtualMachine": {
-			"id": "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('storageAccountName'),'/providers/Microsoft.Compute/virtualMachines/',variables('vmUniqueName'))]"
-			}
-		}
+		"primary": true
+	}
     },
     {
       "apiVersion": "[variables('api-version')]",
