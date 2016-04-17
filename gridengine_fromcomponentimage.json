@@ -63,6 +63,18 @@
       "metadata": {
         "description": "The Name of the subnet this VM should be attached to."
       }
+    },
+	"networkSecurityGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "The Name of the Network Security Group (NSG) this VM should use. The NSG should have ports 22 and 27159 (DDT Port) open."
+      }
+    },
+	"subscriptionID": {
+      "type": "string",
+      "metadata": {
+        "description": "The GUID identifier for the subscription being used."
+      }
     }
   },
   "variables": {
@@ -72,15 +84,6 @@
     "subnetRef": "[concat(parameters('vnetID'),'/subnets/',parameters('subnetName'))]"
   },
   "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[parameters('storageAccountName')]",
-      "apiVersion": "[variables('api-version')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "accountType": "[parameters('storageAccountType')]"
-      }
-    },
    {
       "apiVersion": "[variables('api-version')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -97,8 +100,15 @@
               }
             }
           }
-        ]
-      }
+        ],
+		"networkSecurityGroup": { 
+			"id": "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('storageAccountName'),'/providers/Microsoft.Network/networkSecurityGroups/',parameters('networkSecurityGroup'))]"
+		},
+		"primary": true,
+		"virtualMachine": {
+			"id": "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('storageAccountName'),'/providers/Microsoft.Compute/virtualMachines/',variables('vmUniqueName'))]"
+			}
+		}
     },
     {
       "apiVersion": "[variables('api-version')]",
