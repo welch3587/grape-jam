@@ -143,7 +143,7 @@
 					"uri":"https://gridserverdevstorage.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/gscomponent-osDisk.4b826541-f70f-4c8c-9fb5-7d4ac22684f0.vhd"
 					},
 				"vhd":{
-					"uri":"https://gridserverdevstorage.blob.core.windows.net/vmcontainer9938e880-66f3-4b41-8e42-857e13ddddab/osDisk.9938e880-66f3-4b41-8e42-857e13ddddab.vhd"
+					"uri":"[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/vhds/',variables('vmUniqueName'),'.vhd')]"
 					},
 				"caching":"ReadWrite"
 			}
