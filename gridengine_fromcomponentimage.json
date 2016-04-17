@@ -81,7 +81,7 @@
     "api-version": "2015-06-15",
     "vmUniqueName": "[concat(parameters('vmName'),parameters('vmDateTime'))]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
-    "subnetRef": "[concat(parameters('vnetID'),'/subnets/',parameters('subnetName'))]"
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetName'))]"
   },
   "resources": [
    {
