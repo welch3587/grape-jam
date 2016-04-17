@@ -84,6 +84,15 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetName'))]"
   },
   "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[parameters('storageAccountName')]",
+      "apiVersion": "[variables('api-version')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "accountType": "[parameters('storageAccountType')]"
+      }
+    },
    {
       "apiVersion": "[variables('api-version')]",
       "type": "Microsoft.Network/networkInterfaces",
