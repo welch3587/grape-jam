@@ -110,10 +110,10 @@
             }
           }
         ],
-	"networkSecurityGroup": { 
-		"id": "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('storageAccountName'),'/providers/Microsoft.Network/networkSecurityGroups/',parameters('networkSecurityGroup'))]"
-		},
-		"primary": true
+	"primary": true,
+	"virtualMachine": {
+		"id": "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('storageAccountName'),'/providers/Microsoft.Compute/virtualMachines/',variables('vmUniqueName'))]"
+			}
 	}
     },
     {
