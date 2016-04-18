@@ -64,7 +64,7 @@
         "description": "The Name of the subnet this VM should be attached to."
       }
     },
-	"networkSecurityGroup": {
+    "networkSecurityGroup": {
       "type": "string",
       "metadata": {
         "description": "The Name of the Network Security Group (NSG) this VM should use. The NSG should have ports 22 and 27159 (DDT Port) open. The NSG also needs to be associated with the subnet you are assigning to the VM."
@@ -78,6 +78,8 @@
     }
   },
   "variables": {
+    "addressPrefix": "192.168.0.0/16",
+    "subnetPrefix": "10.254.1.0/24",
     "api-version": "2015-06-15",
     "vmUniqueName": "[concat(parameters('vmName'),parameters('vmDateTime'))]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
@@ -91,6 +93,30 @@
       "location": "[parameters('location')]",
       "properties": {
         "accountType": "[parameters('storageAccountType')]"
+      }
+    },
+    {
+      "apiVersion": "[variables('api-version')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[parameters('virtualNetworkName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('addressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[parameters('subnetName')]",
+            "properties": {
+              "addressPrefix": "[variables('subnetPrefix')]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroup'))]"
+              }
+            }
+          }
+        ]
       }
     },
    {
