@@ -78,15 +78,6 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetName'))]"
   },
   "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[parameters('storageAccountName')]",
-      "apiVersion": "[variables('api-version')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "accountType": "[parameters('storageAccountType')]"
-      }
-    },
    {
       "apiVersion": "[variables('api-version')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -116,7 +107,6 @@
       "name": "[variables('vmUniqueName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-	    "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('vmUniqueName'))]"
       ],
       "properties": {
