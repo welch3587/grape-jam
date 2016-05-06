@@ -81,7 +81,7 @@
   {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('vmUniqueName')]",
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "[variables('api-version')]",
       "location": "[parameters('location')]",
       "properties": {
         "accountType": "[parameters('storageAccountType')]"
