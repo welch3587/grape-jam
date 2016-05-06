@@ -78,6 +78,15 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetName'))]"
   },
   "resources": [
+  {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('vmUniqueName')]",
+      "apiVersion": "[variables('apiVersion')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "accountType": "[parameters('storageAccountType')]"
+      }
+   },
    {
       "apiVersion": "[variables('api-version')]",
       "type": "Microsoft.Network/networkInterfaces",
@@ -107,7 +116,8 @@
       "name": "[variables('vmUniqueName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/networkInterfaces/', variables('vmUniqueName'))]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('vmUniqueName'))],
+        [concat('Microsoft.Storage/storageAccounts/', variables('vmUniqueName'))]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -127,7 +137,7 @@
 					"uri":"https://tibconow2016.blob.core.windows.net/system/gscomponent-osDisk.4b826541-f70f-4c8c-9fb5-7d4ac22684f0.vhd"
 					},
 				"vhd":{
-					"uri":"[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/vhds/',variables('vmUniqueName'),'.vhd')]"
+					"uri":"[concat('https://',variables('vmUniqueName'),'.blob.core.windows.net/vhds/',variables('vmUniqueName'),'.vhd')]"
 					},
 				"caching":"ReadWrite"
 			}
