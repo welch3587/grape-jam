@@ -72,7 +72,6 @@
             	    },
                     "osDisk": {
                         "name": "[variables('osDiskName')]",
-                        "osType": "Linux",
                         "createOption": "FromImage",
                         "vhd": {
                             "uri": "[concat('https://', parameters('storageAccountName'), '.blob.core.windows.net/vhds/', variables('osDiskName'),'.vhd')]"
