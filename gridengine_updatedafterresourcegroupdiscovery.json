@@ -68,7 +68,7 @@
 							"uri":"https://tibconow2016.blob.core.windows.net/system/gscomponent-osDisk.4b826541-f70f-4c8c-9fb5-7d4ac22684f0.vhd"
 						},
                         "vhd": {
-                            "uri": "[concat('https://', parameters('storageAccountName'), '.blob.core.windows.net/vhds/', variables('osDiskName')),'.vhd'))]"
+                            "uri": "[concat('https://', parameters('storageAccountName'), '.blob.core.windows.net/vhds/', variables('osDiskName'),'.vhd')]"
                         },
                         "caching": "ReadWrite"
                     },
