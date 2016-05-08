@@ -2,13 +2,13 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-		"adminUsername": {
-		  "defaultValue": "cloudadmin",
-		  "type": "string",
-		  "metadata": {
-			"description": "User name for the Virtual Machine."
-		  }
-		},
+	"adminUsername": {
+	    "defaultValue": "cloudadmin",
+	    "type": "string",
+	    "metadata": {
+		"description": "User name for the Virtual Machine."
+	    }
+	},
         "adminPassword": {
             "defaultValue": null,
             "type": "SecureString"
@@ -39,6 +39,9 @@
 	"subnetName": {
 	    "type": "String"
 	},
+	"virtualNetworkResourceGroup": {
+	    "type": "String"
+	},
 	"subscriptionID": {
 	    "type": "string"
 	},
@@ -48,7 +51,7 @@
 	"resourceGroup": "[parameters('vmName')]",
 	"networkInterfaceName": "[parameters('storageAccountName')]",
 	"osDiskName" : "[parameters('vmName')]",
-	"networkInterfaceID" : "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',variables('resourceGroup'),'/providers/Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('subnetName'))]"
+	"networkInterfaceID" : "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('virtualNetworkResourceGroup'),'/providers/Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('subnetName'))]"
 	},
     "resources": [
         {
