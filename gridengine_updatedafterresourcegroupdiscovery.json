@@ -13,7 +13,7 @@
             "defaultValue": null,
             "type": "SecureString"
         },
-		"location": {
+	"location": {
             "defaultValue": "centralus",
             "type": "String"
         },
@@ -21,7 +21,7 @@
             "defaultValue": "defaultStorageAcctName",
             "type": "String"
         },
-		"storageAccountType": {
+	"storageAccountType": {
             "defaultValue": "Standard_LRS",
             "type": "String"
         },
@@ -33,22 +33,22 @@
             "defaultValue": null,
             "type": "String"
         },
-		"virtualNetworkName": {
-			"type": "String"
-		},
-		"subnetName": {
-			"type": "String"
-		},
-		"subscriptionID": {
-			"type": "string"
-		},
+	"virtualNetworkName": {
+	    "type": "String"
+	},
+	"subnetName": {
+	    "type": "String"
+	},
+	"subscriptionID": {
+	    "type": "string"
+	},
     },
     "variables": {
-		"apiVersion": "2015-06-15",
-	    "resourceGroup": "[parameters('vmName')]",
-		"networkInterfaceName": "[parameters('vmName')]",
-		"osDiskName" : "[parameters('vmName')]",
-		"networkInterfaceID" : "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',variables('resourceGroup'),'/providers/Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('subnetName'))]"
+	"apiVersion": "2015-06-15",
+	"resourceGroup": "[parameters('vmName')]",
+	"networkInterfaceName": "[parameters('storageAccountName')]",
+	"osDiskName" : "[parameters('vmName')]",
+	"networkInterfaceID" : "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',variables('resourceGroup'),'/providers/Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('subnetName'))]"
 	},
     "resources": [
         {
