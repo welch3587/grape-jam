@@ -1,0 +1,135 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+		"adminUsername": {
+		  "defaultValue": "cloudadmin",
+		  "type": "string",
+		  "metadata": {
+			"description": "User name for the Virtual Machine."
+		  }
+		},
+        "adminPassword": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+		"location": {
+            "defaultValue": "centralus",
+            "type": "String"
+        },
+        "storageAccountName": {
+            "defaultValue": "defaultStorageAcctName",
+            "type": "String"
+        },
+		"storageAccountType": {
+            "defaultValue": "Standard_LRS",
+            "type": "String"
+        },
+        "vmSize": {
+            "defaultValue": "Standard_A1",
+            "type": "String"
+        },
+        "vmName": {
+            "defaultValue": null,
+            "type": "String"
+        },
+		"virtualNetworkName": {
+			"type": "String"
+		},
+		"subnetName": {
+			"type": "String"
+		},
+		"subscriptionID": {
+			"type": "string"
+		},
+    },
+    "variables": {
+		"apiVersion": "2015-06-15",
+	    "resourceGroup": "[parameters('vmName')]",
+		"networkInterfaceName": "[parameters('vmName')]",
+		"osDiskName" : "[parameters('vmName')]",
+		"networkInterfaceID" : "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',variables('resourceGroup'),'/providers/Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('subnetName'))]"
+	},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('vmName')]",
+            "apiVersion": "[variables('apiVersion')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSize')]"
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "name": "[variables('osDiskName')]",
+                        "createOption": "FromImage",
+						"image":{
+							"uri":"https://tibconow2016.blob.core.windows.net/system/gscomponent-osDisk.4b826541-f70f-4c8c-9fb5-7d4ac22684f0.vhd"
+						},
+                        "vhd": {
+                            "uri": "[concat('https://', parameters('storageAccountName'), '.blob.core.windows.net/vhds/', variables('osDiskName')),'.vhd'))]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('vmName')]",
+                    "adminUsername": "[parameters('adminUserName')]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": false
+                    },
+                    "secrets": [],
+                    "adminPassword": "[parameters('adminPassword')]"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
+                        }
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
+            ]
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[variables('networkInterfaceName')]",
+            "apiVersion": "[variables('apiVersion')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Dynamic",
+                            "subnet": {
+                                "id": "[variables('networkInterfaceID')]"
+                            }
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": []
+                },
+                "enableIPForwarding": false
+            },
+            "dependsOn": []
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageAccountName')]",
+            "apiVersion": "[variables('apiVersion')]",
+            "location": "[parameters('location')]",
+            "tags": {},
+            "properties": {
+                "accountType": "[parameters('storageAccountType')]"
+            },
+            "dependsOn": []
+        }
+    ]
+}
