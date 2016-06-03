@@ -27,7 +27,7 @@
         },
         "vmSize": {
             "defaultValue": "Standard_D2",
-            "allowedValues": ["Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D5_V2, Standard_G5" ],
+            "allowedValues": ["Standard_D1", "Standard_D2", "Standard_D3", "Standard_D4", "Standard_D5_V2", "Standard_G5" ],
             "type": "String"
         },
         "vmName": {
