@@ -20,7 +20,7 @@
     },
     "networkInterfaceId": {
       "type": "string",
-	  "defaultValue": "gridmanager00511"
+	  "defaultValue": "/subscriptions/42481d19-1595-4ee7-8245-834213c4c3d1/resourceGroups/TibcoNow2016/providers/Microsoft.Network/networkInterfaces/gridmanager00511"
     },
     "availabilitySetId": {
       "type": "string",
