@@ -1,0 +1,73 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/VM_IP.json",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmName": {
+      "type": "string",
+	  "defaultValue": "GridManager00"
+    },
+    "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_A2"
+    },
+    "adminUserName": {
+      "type": "string",
+	  "defaultValue": "cloudadmin"
+    },
+    "adminPassword": {
+      "type": "securestring",
+	  "defaultValue": "pRuRG7Gk4pv6MZyA"
+    },
+    "networkInterfaceId": {
+      "type": "string",
+	  "defaultValue": "gridmanager00511"
+    },
+    "availabilitySetId": {
+      "type": "string",
+      "defaultValue": "/subscriptions/42481d19-1595-4ee7-8245-834213c4c3d1/resourceGroups/TibcoNow2016/providers/Microsoft.Compute/availabilitySets/TIBCONOW2016AVAILABILITYGROUP"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-06-15",
+      "properties": {
+        "availabilitySet": {
+          "id": "[parameters('availabilitySetId')]"
+        },
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSize')]"
+        },
+        "storageProfile": {
+          "osDisk": {
+            "osType": "Linux",
+            "name": "GridManagerTibcoNow-osDisk.45092108-c8b7-4d86-a296-a48c34c81da4.vhd",
+            "createOption": "FromImage",
+            "image": {
+              "uri": "https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/GridManagerTibcoNow-osDisk.45092108-c8b7-4d86-a296-a48c34c81da4.vhd"
+            },
+            "vhd": {
+              "uri": "https://tibconow2016.blob.core.windows.net/vmcontainer3a325281-33dc-4634-b8a7-b2d8ae2924f0/osDisk.3a325281-33dc-4634-b8a7-b2d8ae2924f0.vhd"
+            },
+            "caching": "ReadWrite"
+          }
+        },
+        "osProfile": {
+          "computerName": "[parameters('vmName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]"
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[parameters('networkInterfaceId')]"
+            }
+          ]
+        },
+        "provisioningState": 0
+      },
+      "name": "[parameters('vmName')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "location": "centralus"
+    }
+  ]
+}
