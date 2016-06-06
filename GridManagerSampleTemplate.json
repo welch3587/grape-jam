@@ -2,6 +2,9 @@
   "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/VM_IP.json",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "instanceUUID": {
+      "type": "string"
+    },
     "vmName": {
       "type": "string",
 	  "defaultValue": "GridManager00"
@@ -40,13 +43,13 @@
         "storageProfile": {
           "osDisk": {
             "osType": "Linux",
-            "name": "GridManagerTibcoNow-osDisk.34530cd1-d891-42a7-8fdc-4931d4574713.vhd",
+            "name": [concat("GridManagerTibcoNow-osDisk.",parameters('instanceUUID'),".vhd")],
             "createOption": "FromImage",
             "image": {
               "uri": "https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/GridManagerTibcoNow-osDisk.45092108-c8b7-4d86-a296-a48c34c81da4.vhd"
             },
             "vhd": {
-              "uri": "https://tibconow2016.blob.core.windows.net/vhds/osDisk.34530cd1-d891-42a7-8fdc-4931d4574713.vhd"
+              "uri": [(concat("https://tibconow2016.blob.core.windows.net/vhds/osDisk.",parameters('instanceUUID'),".vhd"
             },
             "caching": "ReadWrite"
           }
