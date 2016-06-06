@@ -40,7 +40,7 @@
         "storageProfile": {
           "osDisk": {
             "osType": "Linux",
-            "name": "GridManagerTibcoNow-osDisk.45092108-c8b7-4d86-a296-a48c34c81da4.vhd",
+            "name": "GridManagerTibcoNow-osDisk.b79568ef-e525-4cd3-9fd4-2a5c2df24748.vhd",
             "createOption": "FromImage",
             "image": {
               "uri": "https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/vhds/GridManagerTibcoNow-osDisk.45092108-c8b7-4d86-a296-a48c34c81da4.vhd"
