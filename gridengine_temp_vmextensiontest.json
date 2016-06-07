@@ -52,7 +52,7 @@
 	"resourceGroup": "[parameters('vmName')]",
 	"networkInterfaceName": "[parameters('vmName')]",
 	"osDiskName" : "[parameters('vmName')]",
-	"networkInterfaceID" : "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('virtualNetworkResourceGroup'),'/providers/Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('subnetName'))]"
+	"networkInterfaceID" : "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/','tibconow2016','/providers/Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('subnetName'))]"
 	},
     "resources": [
         {
@@ -73,7 +73,7 @@
 							"uri":"https://tibconow2016.blob.core.windows.net/system/gsengine-linux-u14-gs620.vhd"
 							},
 						"vhd":{
-							"uri":"[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
+							"uri":"[concat('https://tibconow2016.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
 							},
 						"caching":"ReadWrite"
 					}
@@ -96,7 +96,6 @@
                 }
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
                 "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
             ]
         },
@@ -121,17 +120,6 @@
                     "dnsServers": []
                 },
                 "enableIPForwarding": false
-            },
-            "dependsOn": []
-        },
-        {
-            "type": "Microsoft.Storage/storageAccounts",
-            "name": "[parameters('storageAccountName')]",
-            "apiVersion": "[variables('apiVersion')]",
-            "location": "[parameters('location')]",
-            "tags": {},
-            "properties": {
-                "accountType": "[parameters('storageAccountType')]"
             },
             "dependsOn": []
         }
