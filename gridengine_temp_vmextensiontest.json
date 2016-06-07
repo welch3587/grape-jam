@@ -73,7 +73,7 @@
 							"uri":"https://tibconow2016.blob.core.windows.net/system/gsengine-linux-u14-gs620.vhd"
 							},
 						"vhd":{
-							"uri":"[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/vhds/',variables('vmUniqueName'),'.vhd')]"
+							"uri":"[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
 							},
 						"caching":"ReadWrite"
 					}
