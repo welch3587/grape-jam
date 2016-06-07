@@ -67,7 +67,7 @@
 				"storageProfile":{
 					"osDisk":{
 						"osType":"Linux",
-						"name":"[concat(variables('vmUniqueName'),'.vhd')]",
+						"name":"[concat(parameters('vmName'),'.vhd')]",
 						"createOption":"FromImage",
 						"image":{
 							"uri":"https://tibconow2016.blob.core.windows.net/system/gsengine-linux-u14-gs620.vhd"
