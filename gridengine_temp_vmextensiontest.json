@@ -139,9 +139,9 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [
-            "[parameters('customScriptFilePath')]"
+            "https://raw.githubusercontent.com/welch3587/grape-jam/master/AzureVMExtension.sh"
           ],
-          "commandToExecute": "[concat(parameters('customScriptCommandToExecute'), reference(concat(variables('nicName'), '0')).ipConfigurations[0].properties.privateIPAddress)]"
+          "commandToExecute": "AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
         }
       }
     }
