@@ -129,8 +129,8 @@
       "apiVersion": "2015-05-01-preview",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'), '1')]",
-        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'), '0')]"
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
       ],
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
