@@ -139,7 +139,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": ["/home/cloudadmin/AzureVMExtension.sh"],
-          "commandToExecute": "AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
+          "commandToExecute": "/home/cloudadmin/AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
         }
       }
     }
