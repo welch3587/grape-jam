@@ -122,6 +122,28 @@
                 "enableIPForwarding": false
             },
             "dependsOn": []
+        },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'), '1/', variables('vmExtensionName'))]",
+      "apiVersion": "2015-05-01-preview",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'), '1')]",
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceID'), '0')]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.OSTCExtensions",
+        "type": "CustomScriptForLinux",
+        "typeHandlerVersion": "1.5",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [
+            "[parameters('customScriptFilePath')]"
+          ],
+          "commandToExecute": "[concat(parameters('customScriptCommandToExecute'), reference(concat(variables('nicName'), '0')).ipConfigurations[0].properties.privateIPAddress)]"
         }
+      }
+    }
     ]
 }
