@@ -70,7 +70,7 @@
 						"name":"[concat(parameters('vmName'),'.vhd')]",
 						"createOption":"FromImage",
 						"image":{
-							"uri":"https://tibconow2016.blob.core.windows.net/system/gsengine-linux-u14-gs620-2.vhd"
+							"uri":"https://tibconow2016.blob.core.windows.net/system/gsengine-linux-u14-gs620-3.vhd"
 							},
 						"vhd":{
 							"uri":"[concat('https://tibconow2016.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
@@ -138,8 +138,8 @@
         "typeHandlerVersion": "1.5",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "fileUris": ["/home/cloudadmin/AzureVMExtension.sh"],
-          "commandToExecute": "/home/cloudadmin/AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
+          "fileUris": ["/opt/AzureVMExtension.sh"],
+          "commandToExecute": "/opt/AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
         }
       }
     }
