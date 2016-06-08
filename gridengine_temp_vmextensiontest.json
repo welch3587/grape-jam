@@ -130,7 +130,7 @@
       "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'), '1')]",
-        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceID'), '0')]"
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'), '0')]"
       ],
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
