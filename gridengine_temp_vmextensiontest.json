@@ -70,7 +70,7 @@
 						"name":"[concat(parameters('vmName'),'.vhd')]",
 						"createOption":"FromImage",
 						"image":{
-							"uri":"https://tibconow2016.blob.core.windows.net/system/gsengine-linux-u14-gs620.vhd"
+							"uri":"https://tibconow2016.blob.core.windows.net/system/gsengine-linux-u14-gs620-2.vhd"
 							},
 						"vhd":{
 							"uri":"[concat('https://tibconow2016.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
