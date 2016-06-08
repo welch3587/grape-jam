@@ -138,7 +138,6 @@
         "typeHandlerVersion": "1.5",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "fileUris": ["/opt/AzureVMExtension.sh"],
           "commandToExecute": "/opt/AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
         }
       }
