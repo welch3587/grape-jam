@@ -139,7 +139,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": ["https://raw.githubusercontent.com/welch3587/grape-jam/master/AzureVMExtension.sh"],
-          "commandToExecute": "/opt/sh AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
+          "commandToExecute": "/opt/AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
         }
       }
     }
