@@ -125,7 +125,7 @@
         },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "ConfigAndLaunchEngineLinux",
+      "name": "[concat(parameters('vmName'),'/ConfigAndLaunchEngineLinux')]",
       "apiVersion": "2015-05-01-preview",
       "location": "[parameters('location')]",
       "dependsOn": [
@@ -139,7 +139,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": ["https://raw.githubusercontent.com/welch3587/grape-jam/master/AzureVMExtension.sh"],
-          "commandToExecute": "/opt/AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
+          "commandToExecute": "sh AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
         }
       }
     }
