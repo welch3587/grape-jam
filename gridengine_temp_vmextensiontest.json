@@ -50,6 +50,9 @@
     "variables": {
 	"apiVersion": "2015-06-15",
 	"baseUrl" : "https://github.com/welch3587/grape-jam/blob/master/",
+	"managerIP" : "13.89.55.122",
+	"managerHostName" : "gridmanager00.centralus.cloudapp.azure.com",
+	"managerHTTPPort" : "8000",
 	"resourceGroup": "[parameters('vmName')]",
 	"networkInterfaceName": "[parameters('vmName')]",
 	"osDiskName" : "[parameters('vmName')]",
@@ -139,8 +142,8 @@
         "typeHandlerVersion": "1.5",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "fileUris": ["[concat(variables('baseUrl'),'AzureVMExtension.sh')]"],
-          "commandToExecute": "sh AzureVMExtension.sh qa 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com 8000 13.89.55.122 gridmanager00.centralus.cloudapp.azure.com"
+          "fileUris": "[concat(variables('baseUrl'),'AzureVMExtension.sh')]",
+          "commandToExecute": "[concat('sh AzureVMExtension.sh ',parameters('adminUserName'),' ',variables('managerIP'),' ',variables('managerHostName'),' ',variables('managerHTTPPort'),' ',variables('managerIP'),' ',variables('managerHostName'))]"
         }
       }
     }
