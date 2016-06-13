@@ -129,7 +129,7 @@
         },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'-',/ConfigAndLaunchEngineLinux')]",
+      "name": "[concat(parameters('vmName'),'/ConfigAndLaunchEngineLinux')]",
       "apiVersion": "[variables('apiVersion')]",
       "location": "[parameters('location')]",
       "dependsOn": [
