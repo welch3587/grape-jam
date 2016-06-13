@@ -142,7 +142,7 @@
         "typeHandlerVersion": "1.5",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "fileUris": "[concat(variables('baseUrl'),'AzureVMExtension.sh')]",
+          "fileUris": ["[concat(variables('baseUrl'),'AzureVMExtension.sh')]"],
           "commandToExecute": "[concat('sh AzureVMExtension.sh ',parameters('adminUserName'),' ',variables('managerIP'),' ',variables('managerHostName'),' ',variables('managerHTTPPort'),' ',variables('managerIP'),' ',variables('managerHostName'))]"
         }
       }
