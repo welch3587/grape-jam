@@ -74,7 +74,7 @@
 						"name":"[concat(parameters('vmName'),'.vhd')]",
 						"createOption":"FromImage",
 						"image":{
-							"uri":"https://tibconow2016.blob.core.windows.net/system/gsengine-linux-u14-gs620-3.vhd"
+							"uri":"https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/system/GridEngineTemplate-osDisk.2cba955a-eb8d-4c29-b809-dd3d721dee56.vhd"
 							},
 						"vhd":{
 							"uri":"[concat('https://tibconow2016.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
