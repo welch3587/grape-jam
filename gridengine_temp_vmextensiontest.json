@@ -49,7 +49,7 @@
     },
     "variables": {
 	"apiVersion": "2016-03-30",
-	"baseUrl" : "https://tibconow2016.file.core.windows.net/scripts/",
+	"baseUrl" : "https://raw.githubusercontent.com/welch3587/grape-jam/master/",
 	"managerIP" : "13.89.55.122",
 	"managerHostName" : "gridmanager00.centralus.cloudapp.azure.com",
 	"managerHTTPPort" : "8000",
@@ -142,7 +142,7 @@
         "typeHandlerVersion": "1.4",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "fileUris": ["[concat(variables('baseUrl'),'AzureVMExtension.sh')]"],
+          "fileUris": ["[concat(variables('baseUrl'),'testBashShell.sh')]"],
           "commandToExecute": "[concat('sh AzureVMExtension.sh ',parameters('adminUserName'),' ',variables('managerIP'),' ',variables('managerHostName'),' ',variables('managerHTTPPort'),' ',variables('managerIP'),' ',variables('managerHostName'))]"
         }
       }
