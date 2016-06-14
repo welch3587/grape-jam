@@ -133,8 +133,7 @@
       "apiVersion": "[variables('apiVersion')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
-        "[resourceId('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
         ],
       "properties": {
         "publisher": "Microsoft.OSTCExtensions",
@@ -142,9 +141,7 @@
         "typeHandlerVersion": "1.4",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "fileUris": [
-          	"[concat(variables('baseUrl'),'testBashShell.sh')]"
-          	],
+          "fileUris": "[concat(variables('baseUrl'),'testBashShell.sh')]",
           "commandToExecute": "sh testBashShell.sh"
         },
     "protectedSettings": {
