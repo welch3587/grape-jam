@@ -74,7 +74,7 @@
 						"name":"[concat(parameters('vmName'),'.vhd')]",
 						"createOption":"FromImage",
 						"image":{
-							"uri":"https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/system/GridEngineTemplate-osDisk.2cba955a-eb8d-4c29-b809-dd3d721dee56.vhd"
+							"uri":"https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/system/GridEngineTemplate-osDisk.01a2c075-698b-4f7a-96d1-f9b0c3f047f0.vhd"
 							},
 						"vhd":{
 							"uri":"[concat('https://tibconow2016.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
@@ -126,6 +126,24 @@
                 "enableIPForwarding": false
             },
             "dependsOn": []
+        },	
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'),'/CustomScriptForLinux')]",
+      "apiVersion": "[variables('apiVersion')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
+        ],
+      "properties": {
+        "publisher": "Microsoft.OSTCExtensions",
+        "type": "CustomScriptForLinux",
+        "typeHandlerVersion": "1.5",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "commandToExecute": "[concat('sh /opt/AzureVMExtension.sh ',parameters('adminUsername'),' ',variables('managerIP'),' ',variables('managerHostName'),' ',variables('managerHTTPPort'),' ',variables('managerIP'),' ',variables('managerHostName')]"
         }
+      }
+    }
     ]
 }
