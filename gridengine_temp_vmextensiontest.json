@@ -126,29 +126,6 @@
                 "enableIPForwarding": false
             },
             "dependsOn": []
-        },
-    {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/CustomScriptForLinux')]",
-      "apiVersion": "[variables('apiVersion')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-        ],
-      "properties": {
-        "publisher": "Microsoft.OSTCExtensions",
-        "type": "CustomScriptForLinux",
-        "typeHandlerVersion": "1.5",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "fileUris": "[concat(variables('baseUrl'),'testBashShell.sh')]",
-          "commandToExecute": "sh testBashShell.sh"
-        },
-         "protectedSettings": {
-           "storageAccountName": "tibconow2016",
-           "storageAccountKey": "n2avx98Rxn6lHBTaGSMBl6vGfnkqZhzORPtntTHTiwxIFo+JW8/5L4sDHZ8l+w0iWzafBNo4KtD+qRjOYhTh1A=="
         }
-      }
-    }
     ]
 }
