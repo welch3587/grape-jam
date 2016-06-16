@@ -74,7 +74,7 @@
 						"name":"[concat(parameters('vmName'),'.vhd')]",
 						"createOption":"FromImage",
 						"image":{
-							"uri":"https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/system/tempExtensionTest-osDisk.96cf04ce-0bd5-4436-b068-ac8179ddc37f.vhd"
+							"uri":"https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/system/GridEngineTemplate-osDisk.2cba955a-eb8d-4c29-b809-dd3d721dee56.vhd"
 							},
 						"vhd":{
 							"uri":"[concat('https://tibconow2016.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
@@ -126,24 +126,6 @@
                 "enableIPForwarding": false
             },
             "dependsOn": []
-        },
-    {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/CustomScriptForLinux')]",
-      "apiVersion": "[variables('apiVersion')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-        ],
-      "properties": {
-        "publisher": "Microsoft.OSTCExtensions",
-        "type": "CustomScriptForLinux",
-        "typeHandlerVersion": "1.5",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "commandToExecute": "sh /opt/testBashShell.sh"
         }
-      }
-    }
     ]
 }
