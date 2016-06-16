@@ -141,7 +141,7 @@
         "typeHandlerVersion": "1.5",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "commandToExecute": "[concat('sh /opt/AzureVMExtension.sh ',parameters('adminUsername'),' ',variables('managerIP'),' ',variables('managerHostName'),' ',variables('managerHTTPPort'),' ',variables('managerIP'),' ',variables('managerHostName')]"
+          "commandToExecute": "[concat('sh /opt/AzureVMExtension.sh ',parameters('adminUsername'),' ',variables('managerIP'),' ',variables('managerHostName'),' ',variables('managerHTTPPort'),' ',variables('managerIP'),' ',variables('managerHostName'))]"
         }
       }
     }
