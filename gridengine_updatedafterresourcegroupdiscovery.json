@@ -45,15 +45,6 @@
 	},
 	"subscriptionID": {
 	    "type": "string"
-	},
-	"directorIP": {
-	    "type": "string"
-	},
-	"directorFQDN": {
-	    "type": "string"
-	},
-	"directorEngineCommPort": {
-	    "type": "string"
 	}
     },
     "variables": {
@@ -73,20 +64,23 @@
                 "hardwareProfile": {
                     "vmSize": "[parameters('vmSize')]"
                 },
-                "storageProfile":{
-		  "osDisk":{
-		    "osType":"Linux",
-		    "name":"[concat(parameters('vmName'),'.vhd')]",
-		    "createOption":"FromImage",
-		    "image":{
-			"uri":"https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/system/GridEngineTemplate-osDisk.01a2c075-698b-4f7a-96d1-f9b0c3f047f0.vhd"
-			},
-		    "vhd":{
-			"uri":"[concat('https://tibconow2016.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
-			},
-		    "caching":"ReadWrite"
-		  }
-		},
+                "storageProfile": {
+		    "imageReference": {
+                	"publisher": "Canonical",
+                	"offer": "UbuntuServer",
+                	"sku": "14.04.4-LTS",
+                	"version": "latest"
+            	    },
+                    "osDisk": {
+                        "name": "[variables('osDiskName')]",
+                        "createOption": "FromImage",
+                        "vhd": {
+                            "uri": "[concat('https://', parameters('storageAccountName'), '.blob.core.windows.net/vhds/', variables('osDiskName'),'.vhd')]"
+                        },
+                        "caching": "ReadWrite"
+                    },
+                    "dataDisks": []
+                },
                 "osProfile": {
                     "computerName": "[parameters('vmName')]",
                     "adminUsername": "[parameters('adminUserName')]",
@@ -143,24 +137,6 @@
                 "accountType": "[parameters('storageAccountType')]"
             },
             "dependsOn": []
-        },	
-    {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/CustomScriptForLinux')]",
-      "apiVersion": "[variables('apiVersion')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-        ],
-      "properties": {
-        "publisher": "Microsoft.OSTCExtensions",
-        "type": "CustomScriptForLinux",
-        "typeHandlerVersion": "1.5",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "commandToExecute": "[concat('sh /opt/AzureVMExtension.sh ',parameters('adminUsername'),' ',parameters('directorIP'),' ',parameters('directorFQDN'),' ',parameters('directorEngineCommPort'),' ',parameters('directorIP'),' ',parameters('directorFQDN'))]"
         }
-      }
-    }
     ]
 }
