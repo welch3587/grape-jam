@@ -26,8 +26,8 @@
         "name": "vmName",
         "type": "Microsoft.Common.TextBox",
         "label": "Virtual Machine Name",
-        "toolTip": "The base name of the virtual machine(s)",
-        "defaultValue": "gridengine",
+        "toolTip": "A Unique name for this virtual machine.",
+        "defaultValue": "gse201607181318",
         "constraints": {
           "required": true,
           "regex": "^[a-z0-9A-Z]{1,20}$",
@@ -133,8 +133,7 @@
               "publisher": "Tibco Software Inc",
               "offer": "Grid Server Engine",
               "sku": "U14042"
-            },
-            "count": "[steps('infrastructureConfig').vmCount]"
+            }
           },
           {
             "name": "storageAccount",
@@ -187,6 +186,8 @@
     "outputs": {
       "adminUsername": "[basics('adminUsername')]",
       "adminPassword": "[basics('adminPassword').password]",
+      "authenticationType": "[basics('adminPassword').authenticationType]",
+      "sshPublicKey": "[basics('adminPassword').sshPublicKey]",
       "location": "[location()]",
       "StorageAccountName": "[steps('infrastructureConfig').storageAccount.name]",
       "storageAccountType": "[steps('infrastructureConfig').storageAccount.type]",
