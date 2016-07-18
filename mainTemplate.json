@@ -1,0 +1,180 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "defaultValue": "cloudadmin",
+      "type": "string",
+      "metadata": {
+        "description": "User name for the Virtual Machine."
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Password for the Virtual Machine"
+      }
+    },
+    "authenticationType": {
+      "type": "string",
+      "metadata": {
+        "description": "Authentication type"
+      }
+    },
+    "sshPublicKey": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "SSH public key"
+      }
+    },
+    "location": {
+      "defaultValue": "centralus",
+      "type": "String"
+    },
+    "storageAccountName": {
+      "defaultValue": "defaultStorageAcctName",
+      "type": "String"
+    },
+    "storageAccountType": {
+      "defaultValue": "Standard_LRS",
+      "type": "String"
+    },
+    "vmSize": {
+      "defaultValue": "Standard_D2",
+      "allowedValues": [ "Standard_D2", "Standard_D3", "Standard_D4", "Standard_D5_V2", "Standard_G5" ],
+      "type": "String"
+    },
+    "vmName": {
+      "type": "String"
+    },
+    "virtualNetworkName": {
+      "type": "String"
+    },
+    "subnetName": {
+      "type": "String"
+    },
+    "virtualNetworkResourceGroup": {
+      "type": "String"
+    },
+    "directorIP": {
+      "type": "string"
+    },
+    "directorFQDN": {
+      "type": "string"
+    },
+    "directorEngineCommPort": {
+      "type": "string"
+    }
+  },
+    "variables": {
+	"addressPrefix": "10.0.0.0/16",
+	"subnetPrefix": "10.0.0.0/24",
+	"apiVersion": "2015-06-15",
+	"resourceGroup": "[parameters('vmName')]",
+	"networkInterfaceName": "[parameters('vmName')]",
+	"osDiskName" : "[parameters('vmName')]",
+	"networkInterfaceID" : "[concat('Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('subnetName'))]",
+	"vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
+	"SubnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetName'))]"
+	},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[parameters('vmName')]",
+            "apiVersion": "[variables('apiVersion')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('vmSize')]"
+					},
+                "storageProfile":{
+					"osDisk":{
+						"osType":"Linux",
+						"name":"[concat(parameters('vmName'),'.vhd')]",
+						"createOption":"FromImage",
+						"image":{
+							"uri":"https://tibconow2016.blob.core.windows.net/system/Microsoft.Compute/Images/system/GridEngineTemplate-osDisk.01a2c075-698b-4f7a-96d1-f9b0c3f047f0.vhd"
+							},
+						"vhd":{
+							"uri":"[concat('https://',parameters('storageAccountName'),'.blob.core.windows.net/vhds/',parameters('vmName'),'.vhd')]"
+							},
+						"caching":"ReadWrite"
+						}
+					},
+                "osProfile": {
+                    "computerName": "[parameters('vmName')]",
+                    "adminUsername": "[parameters('adminUserName')]",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": false
+						},
+                    "secrets": [],
+                    "adminPassword": "[parameters('adminPassword')]"
+					},
+                "networkProfile": {
+                    "networkInterfaces": [
+							{
+								"id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
+							}
+						]
+					}
+				},
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName'))]",
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
+				]
+        },
+		{
+			"apiVersion": "[variables('apiVersion')]",
+			"type": "Microsoft.Network/networkInterfaces",
+			"name": "[variables('networkInterfaceName')]",
+			"location": "[parameters('location')]",
+			"dependsOn": [
+				
+			],
+			"properties": {
+			"ipConfigurations": [
+				{
+					"name": "ipconfig",
+					"properties": {
+						"privateIPAllocationMethod": "Dynamic",
+						"subnet": {
+							"id": "[variables('SubnetRef')]"
+						}
+					}
+				}
+			]
+			}
+		},
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[parameters('storageAccountName')]",
+            "apiVersion": "[variables('apiVersion')]",
+            "location": "[parameters('location')]",
+            "tags": {},
+            "properties": {
+                "accountType": "[parameters('storageAccountType')]"
+            },
+            "dependsOn": []
+        },	
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'),'/CustomScriptForLinux')]",
+      "apiVersion": "[variables('apiVersion')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
+        ],
+      "properties": {
+        "publisher": "Microsoft.OSTCExtensions",
+        "type": "CustomScriptForLinux",
+        "typeHandlerVersion": "1.5",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "commandToExecute": "[concat('sh /opt/AzureVMExtension.sh ',parameters('adminUsername'),' ',parameters('directorIP'),' ',parameters('directorFQDN'),' ',parameters('directorEngineCommPort'),' ',parameters('directorIP'),' ',parameters('directorFQDN'))]"
+        }
+      }
+    }
+    ]
+}
