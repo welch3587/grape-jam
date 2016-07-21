@@ -191,6 +191,8 @@
       "location": "[location()]",
       "StorageAccountName": "[steps('infrastructureConfig').storageAccount.name]",
       "storageAccountType": "[steps('infrastructureConfig').storageAccount.type]",
+      "storageAccountNewOrExisting": "[steps('infrastructureInfo').storageAccount.newOrExisting]",
+      "existingStorageAccountRG": "[steps('infrastructureInfo').storageAccount.resourceGroup]",
       "vmSize": "[steps('infrastructureConfig').vmSize]",
       "vmName": "[basics('vmName')]",
       "virtualNetworkName": "[steps('infrastructureConfig').network.name]",
@@ -202,3 +204,4 @@
     }
   }
 }
+
