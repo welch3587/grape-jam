@@ -6,7 +6,7 @@
       "defaultValue": "cloudadmin",
       "type": "string",
       "metadata": {
-        "description": "User name for the Virtual Machine."
+        "description": "User Name for the Virtual Machine."
       }
     },
     "adminPassword": {
