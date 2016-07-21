@@ -1,0 +1,41 @@
+{
+  "adminUsername": {
+    "value": "chuvyrov"
+  },
+  "adminPassword": {
+    "value": "testgridserver1!"
+  },
+  "location": {
+    "value": "westus"
+  },
+  "StorageAccountName": {
+    "value": "tibcogridserver22"
+  },
+  "storageAccountType": {
+    "value": "Standard_LRS"
+  },
+  "vmSize": {
+    "value": "Standard_D2"
+  },
+  "vmName": {
+    "value": "gridengine"
+  },
+  "virtualNetworkName": {
+    "value": "gridserverVNet"
+  },
+  "subnetName": {
+    "value": "default"
+  },
+  "virtualNetworkResourceGroup": {
+    "value": "vnetRG"
+  },
+  "directorIP": {
+    "value": "10.10.1.1"
+  },
+  "directorFQDN": {
+    "value": "tibcogridserver.tibco.com"
+  },
+  "directorEngineCommPort": {
+    "value": "8000"
+  }
+}
