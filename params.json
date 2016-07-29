@@ -1,15 +1,21 @@
 {
   "adminUsername": {
-    "value": "chuvyrov"
+    "value": "cloudadmin"
   },
   "adminPassword": {
-    "value": "testgridserver1!"
+    "value": "pRuRG7Gk4pv6MZyA"
+  },
+  "authenticationType": {
+    "value": "password"
+  },
+  "sshPublicKey": {
+    "value": "null"
   },
   "location": {
-    "value": "westus"
+    "value": "centralus"
   },
   "StorageAccountName": {
-    "value": "tibcogridserver22"
+    "value": "gse201607281034"
   },
   "storageAccountType": {
     "value": "Standard_LRS"
@@ -18,24 +24,27 @@
     "value": "Standard_D2"
   },
   "vmName": {
-    "value": "gridengine"
+    "value": "gse201607281034"
   },
   "virtualNetworkName": {
-    "value": "gridserverVNet"
+    "value": "TibcoNow2016Network"
   },
   "subnetName": {
     "value": "default"
   },
   "virtualNetworkResourceGroup": {
-    "value": "vnetRG"
+    "value": "TibcoNow2016"
   },
   "directorIP": {
-    "value": "10.10.1.1"
+    "value": "10.0.0.4"
   },
   "directorFQDN": {
-    "value": "tibcogridserver.tibco.com"
+    "value": "gridmanager00.centralus.cloudapp.azure.com"
   },
   "directorEngineCommPort": {
     "value": "8000"
+  },
+  "artifactsBaseUrl": {
+    "value": "https://raw.githubusercontent.com/welch3587/grape-jam/master"
   }
 }
