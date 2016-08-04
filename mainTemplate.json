@@ -190,7 +190,7 @@
         "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
       ],
 	  "plan": {
-        "name": "[parameters('vmName')]",
+        "name": "[variables('imageSku')]",
         "publisher": "[variables('imagePublisher')]",
         "product": "[variables('imageOffer')]"
       }
