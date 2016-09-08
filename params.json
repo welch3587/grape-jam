@@ -12,7 +12,7 @@
     "value": "null"
   },
   "location": {
-    "value": "centralus"
+    "value": "eastus"
   },
   "StorageAccountName": {
     "value": "gse201607281034"
@@ -27,13 +27,13 @@
     "value": "gse201607281034"
   },
   "virtualNetworkName": {
-    "value": "TibcoNow2016Network"
+    "value": "tibcovnet"
   },
   "subnetName": {
     "value": "default"
   },
   "virtualNetworkResourceGroup": {
-    "value": "TibcoNow2016"
+    "value": "tibco"
   },
   "directorIP": {
     "value": "10.0.0.4"
