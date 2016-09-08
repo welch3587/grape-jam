@@ -87,7 +87,7 @@
     },
     "artifactsBaseUrl": {
       "type": "string",
-      "defaultValue": "https://tibcogridserver.blob.azure.net",
+      "defaultValue": "https://raw.githubusercontent.com/welch3587/grape-jam/master/",
       "metadata": {
         "description": "Base URL of the solution template gallery package",
         "artifactsBaseUrl": ""
@@ -107,11 +107,13 @@
     "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "SubnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetName'))]",
     "imagePublisher": "tibco-software",
-    "imageOffer": "grid-server-engine-preview",
+    "imageOffer": "grid-server-engine",
     "imageSku": "gs620-u14042",
     "vhdContainer": "vhds",
     "osDiskName": "[parameters('vmName')]",
-    "storageAccountSetupURL": "[concat(variables('baseUrl'),'storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]"
+    "storageAccountSetupURL": "[concat(variables('baseUrl'),'storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
+    "virtualMachineTemplateURL": "[concat(variables('baseUrl'), 'virtualMachine-',parameters('authenticationType'),'.json')]",
+    "sshKeyPath": "[concat('/home/',parameters('adminUsername'),'/.ssh/authorized_keys')]"
   },
   "resources": [
     {
@@ -141,58 +143,6 @@
             "value": "[parameters('existingStorageAccountRG')]"
           }
         }
-      }
-    },
-    {
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[parameters('vmName')]",
-      "apiVersion": "[variables('apiVersion')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[parameters('vmSize')]"
-        },
-        "osProfile": {
-          "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('adminUserName')]",
-          "linuxConfiguration": {
-            "disablePasswordAuthentication": false
-          },
-          "secrets": [ ],
-          "adminPassword": "[parameters('adminPassword')]"
-        },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "[variables('imagePublisher')]",
-            "offer": "[variables('imageOffer')]",
-            "sku": "[variables('imageSku')]",
-            "version": "latest"
-          },
-          "osDisk": {
-            "name": "GridServerOSDisk",
-            "vhd": {
-              "uri": "[concat('http://', parameters('storageAccountName'), '.blob.core.windows.net/', variables('vhdContainer'), '/', variables('osDiskName'), '.vhd')]"
-            },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
-          }
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
-            }
-          ]
-        }
-      },
-      "dependsOn": [
-        "storageAccountSetup",
-        "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
-      ],
-	  "plan": {
-        "name": "[variables('imageSku')]",
-        "publisher": "[variables('imagePublisher')]",
-        "product": "[variables('imageOffer')]"
       }
     },
     {
@@ -243,6 +193,69 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "commandToExecute": "[concat('sh /opt/AzureVMExtension.sh ',parameters('adminUsername'),' ',parameters('directorIP'),' ',parameters('directorFQDN'),' ',parameters('directorEngineCommPort'),' ',parameters('directorIP'),' ',parameters('directorFQDN'))]"
+        }
+      }
+    },
+    {
+      "name": "ccVMDeployment",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "[variables('deployments-api-version')]",
+      "dependsOn": [
+        "storageAccountSetup",
+        "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('virtualMachineTemplateURL')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "vmName": {
+            "value": "[parameters('vmName')]"
+          },
+          "location": {
+            "value": "[resourceGroup().location]"
+          },
+          "storageAccountName": {
+            "value": "[parameters('storageAccountName')]"
+          },
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "sshPublicKey": {
+            "value": "[parameters('sshPublicKey')]"
+          },
+          "sshKeyPath": {
+            "value": "[variables('sshKeyPath')]"
+          },
+          "vmSize": {
+            "value": "[parameters('vmSize')]"
+          },
+          "networkInterfaceName": {
+            "value": "[variables('networkInterfaceName')]"
+          },
+          "virtualMachinesApiVersion": {
+            "value": "[variables('apiVersion')]"
+          },
+          "vmExtensionsApiVersion": {
+            "value": "[variables('apiVersion')]"
+          },
+          "imagePublisher": {
+            "value": "[variables('imagePublisher')]"
+          },
+          "imageOffer": {
+            "value": "[variables('imageOffer')]"
+          },
+          "imageSku": {
+            "value": "[variables('imageSku')]"
+          },
+          "vhdContainer": {
+            "value": "[variables('vhdContainer')]"
+          }
         }
       }
     }
