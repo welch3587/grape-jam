@@ -87,7 +87,7 @@
     },
     "artifactsBaseUrl": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/welch3587/grape-jam/master/",
+      "defaultValue": "https://raw.githubusercontent.com/welch3587/grape-jam/master",
       "metadata": {
         "description": "Base URL of the solution template gallery package",
         "artifactsBaseUrl": ""
@@ -117,7 +117,7 @@
   },
   "resources": [
     {
-      "name": "storageAccountSetup",
+      "name": "storageSetup",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('deployments-api-version')]",
       "properties": {
@@ -172,7 +172,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('deployments-api-version')]",
       "dependsOn": [
-        "storageAccountSetup",
+        "storageSetup",
         "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
       ],
       "properties": {
