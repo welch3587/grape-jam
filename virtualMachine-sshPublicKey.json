@@ -59,7 +59,7 @@
   },
     "variables": {
         "apiVersion": "2015-06-15",
-        "OSDiskName": "osdiskforlinuxsimple"
+        "osDiskName": "[parameters('vmName')]"
     },
     "resources": [
         {
@@ -100,7 +100,7 @@
                     "osDisk": {
                         "name": "osdisk",
                       "vhd": {
-                        "uri": "[concat('http://', parameters('storageAccountName'),'.blob.core.windows.net/', parameters('vhdContainer'),'/',variables('OSDiskName'),'.vhd')]"
+                        "uri": "[concat('http://', parameters('storageAccountName'),'.blob.core.windows.net/', parameters('vhdContainer'),'/',variables('osDiskName'),'.vhd')]"
                       },
                         "caching": "ReadWrite",
                         "createOption": "FromImage"
