@@ -98,12 +98,7 @@
     "deployments-api-version": "2016-02-01",
     "storage-api-version": "2015-06-15",
     "baseUrl": "[concat(parameters('artifactsBaseUrl'), '/')]",
-    "addressPrefix": "10.0.0.0/16",
-    "subnetPrefix": "10.0.0.0/24",
-    "apiVersion": "2015-06-15",
-    "resourceGroup": "[parameters('vmName')]",
     "networkInterfaceName": "[parameters('vmName')]",
-    "networkInterfaceID": "[concat('Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('subnetName'))]",
     "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "SubnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetName'))]",
     "imagePublisher": "tibco-software",
@@ -146,7 +141,7 @@
       }
     },
     {
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "[variables('storage-api-version')]",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('networkInterfaceName')]",
       "location": "[parameters('location')]",
@@ -210,10 +205,10 @@
             "value": "[variables('networkInterfaceName')]"
           },
           "virtualMachinesApiVersion": {
-            "value": "[variables('apiVersion')]"
+            "value": "[variables('storage-api-version')]"
           },
           "vmExtensionsApiVersion": {
-            "value": "[variables('apiVersion')]"
+            "value": "[variables('storage-api-version')]"
           },
           "imagePublisher": {
             "value": "[variables('imagePublisher')]"
@@ -233,7 +228,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/CustomScriptForLinux')]",
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "[variables('storage-api-version')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "gridServerVMDeployment"
