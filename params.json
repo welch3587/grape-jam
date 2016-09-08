@@ -44,7 +44,10 @@
   "directorEngineCommPort": {
     "value": "8000"
   },
-  "artifactsBaseUrl":  {
+  "artifactsBaseUrl": {
     "value": "https://raw.githubusercontent.com/welch3587/grape-jam/master"
+  },
+  "storageAccountNewOrExisting": {
+    "value": "new"
   }
-}
+  }

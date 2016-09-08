@@ -168,36 +168,7 @@
       }
     },
     {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[parameters('storageAccountName')]",
-      "apiVersion": "[variables('apiVersion')]",
-      "location": "[parameters('location')]",
-      "tags": { },
-      "properties": {
-        "accountType": "[parameters('storageAccountType')]"
-      },
-      "dependsOn": [ ]
-    },
-    {
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/CustomScriptForLinux')]",
-      "apiVersion": "[variables('apiVersion')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-      ],
-      "properties": {
-        "publisher": "Microsoft.OSTCExtensions",
-        "type": "CustomScriptForLinux",
-        "typeHandlerVersion": "1.5",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "commandToExecute": "[concat('sh /opt/AzureVMExtension.sh ',parameters('adminUsername'),' ',parameters('directorIP'),' ',parameters('directorFQDN'),' ',parameters('directorEngineCommPort'),' ',parameters('directorIP'),' ',parameters('directorFQDN'))]"
-        }
-      }
-    },
-    {
-      "name": "ccVMDeployment",
+      "name": "gridServerVMDeployment",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "[variables('deployments-api-version')]",
       "dependsOn": [
@@ -256,6 +227,24 @@
           "vhdContainer": {
             "value": "[variables('vhdContainer')]"
           }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'),'/CustomScriptForLinux')]",
+      "apiVersion": "[variables('apiVersion')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "gridServerVMDeployment"
+      ],
+      "properties": {
+        "publisher": "Microsoft.OSTCExtensions",
+        "type": "CustomScriptForLinux",
+        "typeHandlerVersion": "1.5",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "commandToExecute": "[concat('sh /opt/AzureVMExtension.sh ',parameters('adminUsername'),' ',parameters('directorIP'),' ',parameters('directorFQDN'),' ',parameters('directorEngineCommPort'),' ',parameters('directorIP'),' ',parameters('directorFQDN'))]"
         }
       }
     }
