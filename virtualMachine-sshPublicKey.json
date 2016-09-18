@@ -35,7 +35,7 @@
     "vmSize": {
       "type": "string"
     },
-    "nicName": {
+    "networkInterfaceName": {
       "type": "string"
     },
     "virtualMachinesApiVersion": {
@@ -109,7 +109,7 @@
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('nicName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('networkInterfaceName'))]"
                         }
                     ]
                 },
