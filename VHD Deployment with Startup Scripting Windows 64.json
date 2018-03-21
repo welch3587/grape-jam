@@ -1,0 +1,193 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "UserName for the Virtual Machine"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Password for the Virtual Machine"
+      }
+    },
+    "userImageStorageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the name of the storage account where the osDiskVhdUri is stored"
+      }
+    },
+    "vmSize": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the size of your VM"
+      }
+    },
+    "vmName": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the name of the vm"
+      }
+    },
+	"virtualNetworkName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Virtual Network that the engine will join"
+      }
+    },
+	"virtualSubnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "The SubNet of the Virtual Network that the engine will join"
+      }
+    },
+	"virtualNetworkResourceGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "The Resource Group of the Virtual Network that the engine will join"
+      }
+    },
+	"subscriptionID": {
+      "type": "string",
+      "metadata": {
+        "description": "Your Subscription ID"
+      }
+    },
+    "osDiskVhdUri": {
+      "type": "string",
+      "metadata": {
+        "description": "Uri of the your user image"
+      }
+    },
+    "osType": {
+      "type": "string",
+      "allowedValues": [
+        "Windows",
+        "Linux"
+      ],
+      "metadata": {
+        "description": "This is the OS that your VM will be running"
+      },
+    },
+    "installFolder": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the path to the engine folder on the VM image. For example /opt/datasynapse/engine"
+      }
+    },
+    "directorIP": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the IP Address for the director"
+      }
+    },
+    "directorPort": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the communication port number for the director"
+      }
+    }
+  },
+  "variables": {
+    "location": "[resourceGroup().location]",
+    "vmName": "[parameters('vmName')]",
+    "virtualNetworkName": "[parameters('virtualNetworkName')]",
+	"virtualSubnetName": "[parameters('virtualSubnetName')]",
+    "nicName": "[concat(variables('vmName'),'-nic')]",
+	"networkInterfaceID" : "[concat('/subscriptions/',parameters('subscriptionID'),'/resourceGroups/',parameters('virtualNetworkResourceGroup'),'/providers/Microsoft.Network/virtualNetworks/',parameters('virtualNetworkName'),'/subnets/',parameters('virtualSubnetName'))]",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('virtualSubnetName'))]",
+    "osDiskVhdName": "[concat('https://',parameters('userImageStorageAccountName'),'.blob.core.windows.net/vhds/',variables('vmName'),'-osDisk.vhd')]",
+    "apiVersion": "2015-06-15"
+  },
+  "resources": [
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[variables('nicName')]",
+      "location": "[variables('location')]",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('networkInterfaceID')]"
+              }
+            }
+          }
+        ]
+      }
+    },        
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[variables('vmName')]",
+      "location": "[variables('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+      ],
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSize')]"
+        },
+        "osProfile": {
+          "computerName": "[variables('vmName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]"
+        },
+        "storageProfile": {
+          "osDisk": {
+            "name": "[concat(variables('vmName'),'-osDisk')]",
+            "osType": "[parameters('osType')]",
+            "caching": "ReadWrite",
+            "createOption": "FromImage",
+            "image": {
+			  "uri": "[parameters('osDiskVhdUri')]"
+            },
+            "vhd": {
+              "uri": "[variables('osDiskVhdName')]"
+            }
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+            }
+          ]
+        },
+        "diagnosticsProfile": {
+          "bootDiagnostics": {
+             "enabled": "false"
+          }
+        }
+      }
+    },
+	{
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(variables('vmName'),'/customScript')]",
+      "apiVersion": "[variables('apiVersion')]",
+      "location": "[variables('location')]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+      ],
+	  "properties": {
+		"publisher": "Microsoft.Compute",
+		"type": "CustomScriptExtension",
+		"settings": {  
+			"fileUris": ["[uri('https://hpccapublic.blob.core.windows.net/scripts/', 'ReconfigureEngine.ps1')]"]
+		},
+		"typeHandlerVersion": "1.8",
+		"autoUpgradeMinorVersion": true,
+		"protectedSettings": {
+			"commandToExecute": "[concat('powershell.exe -file ReconfigureEngine.ps1', ' -director ', parameters('directorIP'), ' -directorPort ', parameters('directorPort'), ' -dsFolder ', parameters('installFolder'))]"
+		}
+	  }
+    }
+  ]
+}
