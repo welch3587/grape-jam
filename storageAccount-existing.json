@@ -21,11 +21,10 @@
     "storageAccountExistingRG" : {
       "type" : "string",
       "defaultValue" : ""
-    },
-    "storage-api-version": {
-      "type" : "string",
-      "defaultValue" : ""
     }
+  },
+  "variables": {
+    "storage-api-version": "2015-06-15"
   },
   "resources": [],
   "outputs": {

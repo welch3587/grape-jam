@@ -60,8 +60,8 @@
       "defaultValue": ""
     },
     "vmSize": {
-      "defaultValue": "Standard_D2",
-      "allowedValues": [ "Standard_D2", "Standard_D3", "Standard_D4", "Standard_D5_V2", "Standard_G5" ],
+      "defaultValue": "Standard_A2",
+      "allowedValues": [ "Standard_A2", "Standard_A3", "Standard_A4","Standard_D2", "Standard_D3", "Standard_D4", "Standard_D5", "Standard_D2_V2", "Standard_D3_V2", "Standard_D4_V2","Standard_D5_V2"],
       "type": "String"
     },
     "vmName": {
@@ -99,11 +99,10 @@
     "storage-api-version": "2015-06-15",
     "baseUrl": "[concat(parameters('artifactsBaseUrl'), '/')]",
     "networkInterfaceName": "[parameters('vmName')]",
-    "vnetID": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
-    "SubnetRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetName'))]",
+    "SubnetRef": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'),parameters('subnetName'))]",
     "imagePublisher": "tibco-software",
     "imageOffer": "grid-server-engine",
-    "imageSku": "gs620-u14042",
+    "imageSku": "gs630-rhel7",
     "vhdContainer": "vhds",
     "osDiskName": "[parameters('vmName')]",
     "storageAccountSetupURL": "[concat(variables('baseUrl'),'storageAccount-',parameters('storageAccountNewOrExisting'),'.json')]",
@@ -122,9 +121,6 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "storage-api-version": {
-            "value": "[variables('storage-api-version')]"
-          },
           "location": {
             "value": "[parameters('location')]"
           },
@@ -181,7 +177,7 @@
             "value": "[parameters('vmName')]"
           },
           "location": {
-            "value": "[resourceGroup().location]"
+            "value": "[parameters('location')]"
           },
           "storageAccountName": {
             "value": "[parameters('storageAccountName')]"
