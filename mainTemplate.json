@@ -96,10 +96,10 @@
   },
   "variables": {
     "deployments-api-version": "2018-01-01",
-    "storage-api-version": "2017-11-09",
+    "storage-api-version": "2018-04-01",
     "baseUrl": "[concat(parameters('artifactsBaseUrl'), '/')]",
     "networkInterfaceName": "[parameters('vmName')]",
-    "SubnetRef": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'),parameters('subnetName'))]",
+    "SubnetRef": "[concat(resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName')),'/subnets/',parameters('subnetName'))]",
     "imagePublisher": "tibco-software",
     "imageOffer": "grid-server-engine",
     "imageSku": "gs630-rhel7",
