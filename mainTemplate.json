@@ -95,8 +95,8 @@
     }
   },
   "variables": {
-    "deployments-api-version": "2016-02-01",
-    "storage-api-version": "2015-06-15",
+    "deployments-api-version": "2018-01-01",
+    "storage-api-version": "2017-11-09",
     "baseUrl": "[concat(parameters('artifactsBaseUrl'), '/')]",
     "networkInterfaceName": "[parameters('vmName')]",
     "SubnetRef": "[resourceId(parameters('virtualNetworkResourceGroup'),'Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'),parameters('subnetName'))]",

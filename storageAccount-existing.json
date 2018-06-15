@@ -24,7 +24,7 @@
     }
   },
   "variables": {
-    "storage-api-version": "2015-06-15"
+    "storage-api-version": "2017-11-09"
   },
   "resources": [],
   "outputs": {
