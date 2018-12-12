@@ -180,7 +180,7 @@
 		"publisher": "Microsoft.Compute",
 		"type": "CustomScriptExtension",
 		"settings": {  
-			"fileUris": ["[uri('https://hpccapublic.blob.core.windows.net/scripts/', 'ReconfigureEngine.ps1')]"]
+			"fileUris": ["[uri('https://raw.githubusercontent.com/welch3587/grape-jam/master/', 'ReconfigureEngine.ps1')]"]
 		},
 		"typeHandlerVersion": "1.8",
 		"autoUpgradeMinorVersion": true,
