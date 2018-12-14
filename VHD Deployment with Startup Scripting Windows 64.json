@@ -70,7 +70,7 @@
       ],
       "metadata": {
         "description": "This is the OS that your VM will be running"
-      },
+      }
     },
     "installFolder": {
       "type": "string",
