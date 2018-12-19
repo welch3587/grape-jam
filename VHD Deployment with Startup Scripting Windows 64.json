@@ -89,6 +89,12 @@
       "metadata": {
         "description": "This is the communication port number for the director"
       }
+    },
+    "availabilitySetName": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the Availability Set parameter. It is not used in this template. It is here for debug purposes."
+      }
     }
   },
   "variables": {
