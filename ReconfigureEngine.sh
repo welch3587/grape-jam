@@ -4,7 +4,7 @@ INSTALLDIR=$3
 cd /opt
 tar xvzf DSEngineLinux64.tar.gz
 
-printf "\n10.0.0.4 devhpcca120-3.eastus.cloudapp.azure.com" > director.txt
+printf "\n10.0.0.7 qahpcca120-2.eastus.cloudapp.azure.com" > director.txt
 cat director.txt >> /etc/hosts
 
 cd $INSTALLDIR
