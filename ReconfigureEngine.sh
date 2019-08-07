@@ -1,3 +1,4 @@
+#!/bin/bash
 directorName=$1
 directorIP=$2
 directorPort=$3
@@ -9,7 +10,9 @@ cat director.txt >> /etc/hosts
 
 cd $INSTALLDIR
 
-./engine.sh stop
+tar xzf ./DSEngineLinux64.tar.gz
+
+cd ./datasynapse/engine
 
 if [${sslenabled,,} = "true"]
 then
