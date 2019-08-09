@@ -78,6 +78,12 @@
         "description": "This is the path to the engine folder on the VM image. For example /opt/datasynapse/engine"
       }
     },
+	"directorhostname": {
+      "type": "string",
+      "metadata": {
+        "description": "This is the FQDN for the director"
+      }
+    },
     "directorIP": {
       "type": "string",
       "metadata": {
@@ -90,10 +96,10 @@
         "description": "This is the communication port number for the director"
       }
     },
-    "availabilitySetName": {
+    "sslenabled": {
       "type": "string",
       "metadata": {
-        "description": "This is the Availability Set parameter. It is not used in this template. It is here for debug purposes."
+        "description": "Set to 'true' if the director port has SSL enabled, or 'false' if not."
       }
     }
   },
@@ -191,7 +197,7 @@
 		"typeHandlerVersion": "1.8",
 		"autoUpgradeMinorVersion": true,
 		"protectedSettings": {
-			"commandToExecute": "[concat('powershell.exe -file ReconfigureEngine.ps1', ' -director ', parameters('directorIP'), ' -directorPort ', parameters('directorPort'), ' -dsFolder ', parameters('installFolder'))]"
+			"commandToExecute": "[concat('powershell.exe -file ReconfigureEngine.ps1', ' -directorName ', parameters('directorhostname'), ' -directorIP ', parameters('directorIP'), ' -directorPort ', parameters('directorPort'), ' -dsFolder ', parameters('installFolder'), ' -sslEnabled ', parameters('sslenabled'))]"
 		}
 	  }
     }
