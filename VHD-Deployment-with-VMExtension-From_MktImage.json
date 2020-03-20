@@ -78,7 +78,7 @@
     "vmName": "[parameters('vmName')]",
 	"imagePublisher": "tibco-software",
     "imageOffer": "grid-server-engine",
-    "imageSku": "gs700hf2-win2016dc",
+    "imageSku": "gs700hf2-win2016dc-2",
     "virtualNetworkName": "[parameters('virtualNetworkName')]",
 	"virtualSubnetName": "[parameters('virtualSubnetName')]",
     "nicName": "[concat(variables('vmName'),'-nic')]",
